@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡布局示例</title>
+    <style>
+        /* 基本样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: #555;
+            border: 1px solid transparent;
+        }
+
+        /* 默认样式 */
+        .tab.active {
+            color: #333;
+            border-bottom: 3px solid #333;
+            font-weight: bold;
+        }
+
+        .content {
+            display: none;
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        /* 显示激活的内容 */
+        .content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 标签栏 -->
+    <div class="tabs">
+        <div class="tab active" data-tab="tab1">标签 1</div>
+        <div class="tab" data-tab="tab2">标签 2</div>
+        <div class="tab" data-tab="tab3">标签 3</div>
+    </div>
+
+    <!-- 内容区 -->
+    <div id="tab1" class="content active">
+        <h2>标签 1 的内容</h2>
+        <p>这是标签 1 的内容部分。</p>
+    </div>
+    <div id="tab2" class="content">
+        <h2>标签 2 的内容</h2>
+        <p>这是标签 2 的内容部分。</p>
+    </div>
+    <div id="tab3" class="content">
+        <h2>标签 3 的内容</h2>
+        <p>这是标签 3 的内容部分。</p>
+    </div>
+
+    <script>
+        // 获取所有标签和内容元素
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.content');
+
+        // 标签点击事件
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 清除所有标签和内容的活动状态
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // 激活当前点击的标签和对应的内容
+                tab.classList.add('active');
+                document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
